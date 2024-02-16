@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins' !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.css-honxw6 {
+  width: 7px !important;
+  height: 7px !important;
+}
+.css-jn69v9 {
+  width: 7px !important;
+  height: 7px !important
+}
+.css-16jesut >.ps-menu-button {
+ font-size: 1.2rem !important;
+ color:#7C8DB5 !important
+}
+.Chart_wrapper {
+  border: 1px solid rgb(124 141 181 / 50%);
+  width: max-content;
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.info_container{
+    border: 1px solid #cfdcfc;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+/* card */
+.Card_icon {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+}
+.Card_icon svg{
+  width: 1.6rem;
+  height: 1.6rem;
+  fill:#347AE2;
+}
+.top{
+  transform: rotate(135deg);
+  fill: green !important;
+}
+.low{
+  transform: rotate(315deg);
+
+  fill: red !important;
+}
+.card-border-right::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 3px;
+  background-color: #E6EDFF;
+}
+.card-container {
+  position: relative; 
+}
+.card-container:last-child .card-border-right::after {
+  display: none;
+}
+
+.Periodselect{
+    margin-bottom: -2rem;
+    margin-left: 2rem;
+}
