@@ -6,19 +6,7 @@ import './category.css';
 function All_categories() {
     const [customersData, setCustomersData] = useState([]);
 
-    useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_categories/", {
-            method: "GET",
-            cache: "no-cache"
-        })
-            .then(response => response.json())
-            .then(data => {
-                setCustomersData(JSON.parse(data));
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
-    }, []);
+    
 
     return (
         <>

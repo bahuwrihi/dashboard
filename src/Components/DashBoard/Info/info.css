@@ -1,0 +1,14 @@
+ul {
+    list-style-type: "";
+    padding-left: 0;
+
+  }
+.top_praise {
+    min-height: 100px;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgb(124 141 181 / 50%);
+    margin-top: 1rem;
+}
