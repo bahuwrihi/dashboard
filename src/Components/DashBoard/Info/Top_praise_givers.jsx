@@ -23,11 +23,14 @@ const Top_praise_givers = () => {
     return (
         <div className='top_praise'>
 
-            <h2>Top praise givers</h2>
+            <h3>Top praise givers</h3>
             <ul>
                 {users.map((user, index) => (
                     <li key={index}>
-                        {index + 1}) {user.username} -  {user.sent_praise_count}
+                        <div className='d-flex justify-content-between'>
+                            <span>{user.username}</span>
+                            <span>{user.sent_praise_count}</span>
+                        </div>
                     </li>
                 ))}
             </ul>

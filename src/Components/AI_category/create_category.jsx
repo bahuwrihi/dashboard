@@ -29,7 +29,7 @@ function CategoryForm() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <Container>
                 <div className='title'>Create a new Assistant</div>
                 <Form onSubmit={handleSubmit} className='w-75'>

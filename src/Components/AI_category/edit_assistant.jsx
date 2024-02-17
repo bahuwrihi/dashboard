@@ -65,7 +65,7 @@ function Edit_assistant({ assistant_id, AssistantName, AssistantInstruction }) {
 
     return (
         <div>
-            <Header />
+            {/* <Header /> */}
 
             <Container>
                 <h1>Edit Assistant</h1>

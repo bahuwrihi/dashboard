@@ -61,8 +61,8 @@ function Dashboard() {
 
     return (
         <>
-            <Header
-                text={"Welcome back, Luciano"} />
+            {/* <Header
+                text={"Welcome back, Luciano"} /> */}
             <dashboard className="ml-5">
 
                 {/* <div className='d-flex justify-content-between info_container '>

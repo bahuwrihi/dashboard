@@ -14,7 +14,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from "./logo.svg"
-
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 
 const Item = ({ title, to, icon, selected, setSelected, newColor }) => {
     const theme = useTheme();
@@ -145,12 +145,20 @@ const MyProSidebar = () => {
                             setSelected={setSelected}
                         />
                         <Item
+                            title="Praises"
+                            to="/praises"
+                            icon={<ShowChartIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
                             title="FAQ"
                             to="/faq"
                             icon={<LiveHelpRoundedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
+
                         <Item
                             title="Setting"
                             to="/setting"

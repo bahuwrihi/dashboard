@@ -7,6 +7,9 @@ import Chart from "./Components/DashBoard/linechart"
 import Dashboard from "./Components/DashBoard/Dashboard";
 import All_categories from "./Components/AI_category/all_categories";
 import Edit_assistant from "./Components/AI_category/edit_assistant";
+import Praises from "./Components/Praises/Praises";
+import Users from "./Components/Users/Users";
+import Faq from "./Components/Faq/Faq";
 const Routing = () => {
   return (
     <Routes>
@@ -14,10 +17,16 @@ const Routing = () => {
       <Route path="/login" element={<Login />} />
 
       <Route path="/category_create" element={<DefaultLayout><Category /></DefaultLayout>} />
-      
+
       <Route path="/categories" element={<DefaultLayout><All_categories /></DefaultLayout>} />
 
       <Route path="/categories/:id" element={<DefaultLayout>< Edit_assistant /></DefaultLayout>} />
+
+      <Route path="/praises" element={<DefaultLayout><Praises /></DefaultLayout>} />
+
+      <Route path="/users" element={<DefaultLayout><Users /></DefaultLayout>} />
+
+      <Route path="/faq" element={<DefaultLayout><Faq /></DefaultLayout>} />
 
       <Route path="/another-route" element={<DefaultLayout><div>ne 123</div></DefaultLayout>} />
 

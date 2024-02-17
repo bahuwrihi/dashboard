@@ -12,9 +12,25 @@ const Top_praise_receivers = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log("get_top_praise_givers")
+                console.log("get_top_praise_receivers")
                 console.log(JSON.parse(data))
                 setUsers(JSON.parse(data))
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    }, []);
+
+
+    useEffect(() => {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_item=0", {
+            method: "GET",
+            cache: "no-cache"
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("get_praises")
+                console.log(JSON.parse(data))
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
@@ -24,12 +40,16 @@ const Top_praise_receivers = () => {
     return (
         <div className='top_praise'>
 
-            <h2>Top praise receivers</h2>
+            <h3>Top praise receivers</h3>
             <ul>
                 {users.map((user, index) => (
                     <li key={index}>
-                        {index + 1}) {user.username} -  {user.received_praises}
+                        <div className='d-flex justify-content-between'>
+                            <span>{user.username}</span>
+                            <span>{user.received_praises_count}</span>
+                        </div>
                     </li>
+
                 ))}
             </ul>
         </div>
