@@ -22,20 +22,20 @@ const Top_praise_receivers = () => {
     }, []);
 
 
-    useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_item=0", {
-            method: "GET",
-            cache: "no-cache"
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log("get_praises")
-                console.log(JSON.parse(data))
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_item=0", {
+    //         method: "GET",
+    //         cache: "no-cache"
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log("get_praises")
+    //             console.log(JSON.parse(data))
+    //         })
+    //         .catch(error => {
+    //             console.error("Error fetching data:", error);
+    //         });
+    // }, []);
 
     return (
         <div className='top_praise'>
@@ -46,7 +46,7 @@ const Top_praise_receivers = () => {
                     <li key={index}>
                         <div className='d-flex justify-content-between'>
                             <span>{user.username}</span>
-                            <span>{user.received_praises_count}</span>
+                            <span>{user.sent_praise_count}</span>
                         </div>
                     </li>
 

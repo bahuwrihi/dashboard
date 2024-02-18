@@ -1,46 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../Header/header'
+import Header from '../Header/header';
 
-
-function Users() {
+function Worktime() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_users/?current_item=0", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_worktime/?current_item=0", {
             method: "GET",
             cache: "no-cache"
         })
             .then(response => response.json())
             .then(data => {
-                console.log(JSON.parse(data))
-                setUsers(JSON.parse(data))
+
+                setUsers(JSON.parse(data));
+
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
     }, []);
 
+    const formatDate = (dateStr) => {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+    };
+
     return (
         <>
             <div className="container mt-5">
-                <h2>All Users</h2>
+                <h2>Worktime</h2>
                 <div className="table-responsive">
                     <table className="table">
                         <thead>
                             <tr>
                                 <th className='table_header'>Username</th>
-                                <th className='table_header'>Sent praises</th>
-                                <th className='table_header'>Received praises</th>
+                                <th className='table_header'>Date</th>
+                                <th className='table_header'>Working Hours</th>
                                 <th className='table_header'>Group</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((users) => (
-                                <tr key={users.pk}>
-                                    <td>{users.username}</td>
-                                    <td>{users.sent_praise_count}</td>
-                                    <td>{users.received_praise_count}</td>
-                                    <td>{users.group__name || "—"}</td>
+                            {users.map((user) => (
+                                <tr key={user.pk}>
+                                    <td>{user.fields.username}</td>
+                                    <td>{formatDate(user.fields.date)}</td>
+                                    <td>{user.fields.working_hours}</td>
+                                    <td>{user.fields.group}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -51,4 +56,4 @@ function Users() {
     );
 }
 
-export default Users;
+export default Worktime;

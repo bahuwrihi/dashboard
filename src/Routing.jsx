@@ -10,10 +10,13 @@ import Edit_assistant from "./Components/AI_category/edit_assistant";
 import Praises from "./Components/Praises/Praises";
 import Users from "./Components/Users/Users";
 import Faq from "./Components/Faq/Faq";
+import Worktime from "./Components/Worktime/Worktime";
+import Wellness from "./Components/Wellness/Wellness";
 const Routing = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate replace to="/login" />} />
+
       <Route path="/login" element={<Login />} />
 
       <Route path="/category_create" element={<DefaultLayout><Category /></DefaultLayout>} />
@@ -25,6 +28,10 @@ const Routing = () => {
       <Route path="/praises" element={<DefaultLayout><Praises /></DefaultLayout>} />
 
       <Route path="/users" element={<DefaultLayout><Users /></DefaultLayout>} />
+
+      <Route path="/worktime" element={<DefaultLayout><Worktime /></DefaultLayout>} />
+
+      <Route path="/wellness" element={<DefaultLayout><Wellness /></DefaultLayout>} />
 
       <Route path="/faq" element={<DefaultLayout><Faq /></DefaultLayout>} />
 

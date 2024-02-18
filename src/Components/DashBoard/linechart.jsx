@@ -40,6 +40,8 @@ export default function App() {
             .then(response => response.json())
             .then(data => {
                 const parsedData = JSON.parse(data);
+                console.log("parsedData")
+                console.log(parsedData)
                 const formattedData = parsedData.map(entry => ({
                     name: formatDate(entry.day_str.split(' ')[0]),
                     praises: entry.count

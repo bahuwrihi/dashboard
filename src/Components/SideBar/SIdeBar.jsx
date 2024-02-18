@@ -15,6 +15,11 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from "./logo.svg"
 import ShowChartIcon from '@mui/icons-material/ShowChart';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Item = ({ title, to, icon, selected, setSelected, newColor }) => {
     const theme = useTheme();
@@ -26,16 +31,21 @@ const Item = ({ title, to, icon, selected, setSelected, newColor }) => {
         itemColor = newColor;
     }
 
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        setSelected(title);
+        navigate(to);
+    };
+
     return (
         <MenuItem
             active={selected === title}
             style={{ color: itemColor }}
-            onClick={() => setSelected(title)}
-            icon={icon}>
-
-            <Link to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <Typography>{title}</Typography>
-            </Link>
+            onClick={handleClick}
+            icon={icon}
+        >
+            <Typography>{title}</Typography>
         </MenuItem>
     );
 };
@@ -148,6 +158,20 @@ const MyProSidebar = () => {
                             title="Praises"
                             to="/praises"
                             icon={<ShowChartIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Worktime"
+                            to="/worktime"
+                            icon={<AccessTimeIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title="Wellness"
+                            to="/wellness"
+                            icon={<FavoriteIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />

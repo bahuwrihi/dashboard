@@ -12,7 +12,8 @@ const Top_praise_givers = () => {
         })
             .then(response => response.json())
             .then(data => {
-                // console.log("get_top_praise_givers")
+                console.log("get_top_praise_givers")
+                console.log(JSON.parse(data))
                 setUsers(JSON.parse(data))
             })
             .catch(error => {
