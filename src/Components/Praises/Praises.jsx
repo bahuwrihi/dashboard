@@ -18,7 +18,6 @@ function Praises() {
             });
     }, []);
 
-    // Функция для форматирования даты
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
         return date.toLocaleDateString('en-EN', { day: 'numeric', month: 'short' });

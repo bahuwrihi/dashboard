@@ -11,7 +11,7 @@ function Worktime() {
         })
             .then(response => response.json())
             .then(data => {
-
+                console.log(JSON.parse(data))
                 setUsers(JSON.parse(data));
 
             })
@@ -36,16 +36,18 @@ function Worktime() {
                                 <th className='table_header'>Username</th>
                                 <th className='table_header'>Date</th>
                                 <th className='table_header'>Working Hours</th>
+                                <th className='table_header'>Work Periods </th>
                                 <th className='table_header'>Group</th>
                             </tr>
                         </thead>
                         <tbody>
                             {users.map((user) => (
                                 <tr key={user.pk}>
-                                    <td>{user.fields.username}</td>
-                                    <td>{formatDate(user.fields.date)}</td>
-                                    <td>{user.fields.working_hours}</td>
-                                    <td>{user.fields.group}</td>
+                                    <td>{user.username}</td>
+                                    <td>{user.formatted_date}</td>
+                                    <td>{user.working_hours}</td>
+                                    <td>{user.work_periods}</td>
+                                    <td>{user.group__name}</td>
                                 </tr>
                             ))}
                         </tbody>
