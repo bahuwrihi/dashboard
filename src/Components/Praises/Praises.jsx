@@ -31,6 +31,7 @@ function Praises() {
                     <th>Sender</th>
                     <th>Receiver</th>
                     <th>Reason</th>
+                    <th>Category</th>
                     <th>Time</th>
                 </tr>
             </thead>
@@ -41,6 +42,7 @@ function Praises() {
                         <td>{praise.sender__username}</td>
                         <td>{praise.receiver__username}</td>
                         <td>{praise.reason || "—"}</td>
+                        <td>{praise.category__name}</td>
                         <td>{formatDate(praise.formatted_time)}</td>
                     </tr>
                 ))}
