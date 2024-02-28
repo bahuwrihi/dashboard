@@ -1,51 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import "./info.css"
+import { Form } from 'react-bootstrap';
 
 
 const Top_praise_receivers = () => {
     const [users, setUsers] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+    useEffect(() => {
+        if (selectedCategoryId) {
+            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_receivers/?current_item=0&category_id=${selectedCategoryId}`, {
+                method: "GET",
+                cache: "no-cache"
+            })
+                .then(response => response.json())
+                .then(data => {
+                    setUsers(JSON.parse(data))
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+    }, [selectedCategoryId]);
+
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_receivers/?current_item=0", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_categories/", {
             method: "GET",
             cache: "no-cache"
         })
             .then(response => response.json())
             .then(data => {
-                console.log("get_top_praise_receivers")
-                console.log(JSON.parse(data))
-                setUsers(JSON.parse(data))
+                setCategories(JSON.parse(data));
+                if (data.length > 0) {
+                    setSelectedCategoryId(data[0].pk);
+                }
             })
             .catch(error => {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching categories:", error);
             });
+
+
     }, []);
 
-
-    // useEffect(() => {
-    //     fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_item=0", {
-    //         method: "GET",
-    //         cache: "no-cache"
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log("get_praises")
-    //             console.log(JSON.parse(data))
-    //         })
-    //         .catch(error => {
-    //             console.error("Error fetching data:", error);
-    //         });
-    // }, []);
-
+    const handleCategoryChange = (event) => {
+        setSelectedCategoryId(event.target.value);
+    };
     return (
         <div className='top_praise'>
 
             <h3>Top praise receivers</h3>
+            < Form>
+                <Form.Group controlId="categorySelect" style={{ marginBottom: '15px' }}>
+                    <Form.Select value={selectedCategoryId} onChange={handleCategoryChange}>
+                        {categories.map((category) => (
+                            <option key={category.pk} value={category.pk}>
+                                {category.fields.name}
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
+            </Form>
             <ul>
                 {users.map((user, index) => (
                     <li key={index}>
                         <div className='d-flex justify-content-between'>
-                            <span>{user.username}</span>
+                            <span style={{ fontWeight: '600' }} >{user.username}</span>
                             <span>{user.sent_praise_count}</span>
                         </div>
                     </li>

@@ -14,6 +14,7 @@ function All_categories() {
             .then(response => response.json())
             .then(data => {
                 setCustomersData(JSON.parse(data));
+                console.log(JSON.parse(data))
             })
             .catch(error => {
                 console.error("Error fetching data:", error);

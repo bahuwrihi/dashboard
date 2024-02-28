@@ -183,13 +183,13 @@ const MyProSidebar = () => {
                             setSelected={setSelected}
                         />
 
-                        <Item
+                        {/* <Item
                             title="Setting"
                             to="/setting"
                             icon={<SettingsRoundedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        />
+                        /> */}
 
                     </Box>
 
@@ -198,7 +198,7 @@ const MyProSidebar = () => {
                         bottom={0}
 
                     >
-                        <Item
+                        {/* <Item
                             title="Help Centre"
                             to="/help"
                             icon={<HelpIcon />}
@@ -212,7 +212,7 @@ const MyProSidebar = () => {
                             icon={<PhoneIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        />
+                        /> */}
                         <Item
                             title="Log out"
                             to="/login"
