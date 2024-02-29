@@ -27,6 +27,7 @@ const Top_praise_givers = () => {
 
     useEffect(() => {
         if (selectedCategoryId) {
+
             fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_givers/?current_item=0&category_id=${selectedCategoryId}`, {
                 method: "GET",
                 cache: "no-cache"
