@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header/header'
 import CustomerRow from "./category_data"
 import './category.css';
-
+import DownloadIcon from '@mui/icons-material/Download';
 function All_categories() {
     const [customersData, setCustomersData] = useState([]);
 
@@ -25,7 +25,11 @@ function All_categories() {
         <>
             {/* <Header /> */}
             <div className="container mt-5">
-                <h2>All Assistants</h2>
+                <div className='d-flex justify-content-between'>
+                    <h2>All Assistants</h2>
+                    <div><DownloadIcon /></div>
+                </div>
+
                 <div className="table-responsive">
                     <table className="table">
                         <thead>

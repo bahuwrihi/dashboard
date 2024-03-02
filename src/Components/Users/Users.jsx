@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header/header'
+import DownloadIcon from '@mui/icons-material/Download';
 
 
 function Users() {
@@ -23,7 +24,10 @@ function Users() {
     return (
         <>
             <div className="container mt-5">
-                <h2>All Users</h2>
+                <div className='d-flex justify-content-between'>
+                    <h2>All Users</h2>
+                    <div><DownloadIcon /></div>
+                </div>
                 <div className="table-responsive">
                     <table className="table">
                         <thead>

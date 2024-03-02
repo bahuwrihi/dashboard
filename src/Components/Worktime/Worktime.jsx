@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header/header';
 import { Form } from 'react-bootstrap';
+import DownloadIcon from '@mui/icons-material/Download';
 
 function Worktime() {
     const [users, setUsers] = useState([]);
@@ -44,24 +45,25 @@ function Worktime() {
     return (
         <>
             <div className="container mt-5">
+
                 <div className='d-flex justify-content-between'>
                     <h2>Worktime</h2>
+                    <div><DownloadIcon /></div>
 
-                    <Form>
-                        <Form.Group controlId="sortOption">
-                            <Form.Label>Sort Options</Form.Label>
-                            <Form.Control as="select" value={sortOption} onChange={handleSortOptionChange}>
-                                <option value="">Select</option>
-                                <option value="dateAsc">Date Ascending</option>
-                                <option value="dateDesc">Date Descending</option>
-                                <option value="work_periodsAsc">Work Periods Ascending</option>
-                                <option value="work_periodsDesc">Work Periods Descending</option>
-                            </Form.Control>
-                        </Form.Group>
-                    </Form>
                 </div>
 
-
+                <Form>
+                    <Form.Group controlId="sortOption">
+                        <Form.Label>Sort Options</Form.Label>
+                        <Form.Control as="select" value={sortOption} onChange={handleSortOptionChange}>
+                            <option value="">Select</option>
+                            <option value="dateAsc">Date Ascending</option>
+                            <option value="dateDesc">Date Descending</option>
+                            <option value="work_periodsAsc">Work Periods Ascending</option>
+                            <option value="work_periodsDesc">Work Periods Descending</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Form>
 
                 <div className="table-responsive">
                     <table className="table">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import DownloadIcon from '@mui/icons-material/Download';
 
 function Praises() {
     const [praises, setPraises] = useState([]);
@@ -24,30 +25,39 @@ function Praises() {
     };
 
     return (
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>Group</th>
-                    <th>Sender</th>
-                    <th>Receiver</th>
-                    <th>Reason</th>
-                    <th>Category</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                {praises.map((praise) => (
-                    <tr key={praise.pk}>
-                        <td>{praise.group__name}</td>
-                        <td>{praise.sender__username}</td>
-                        <td>{praise.receiver__username}</td>
-                        <td>{praise.reason || "—"}</td>
-                        <td>{praise.category__name}</td>
-                        <td>{formatDate(praise.formatted_time)}</td>
+        <>
+            <div className='d-flex justify-content-between'>
+                <h2>Praises</h2>
+                <div><DownloadIcon /></div>
+
+            </div>
+
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Group</th>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Reason</th>
+                        <th>Category</th>
+                        <th>Time</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {praises.map((praise) => (
+                        <tr key={praise.pk}>
+                            <td>{praise.group__name}</td>
+                            <td>{praise.sender__username}</td>
+                            <td>{praise.receiver__username}</td>
+                            <td>{praise.reason || "—"}</td>
+                            <td>{praise.category__name}</td>
+                            <td>{formatDate(praise.formatted_time)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
+
     );
 }
 

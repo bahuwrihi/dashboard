@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';
 const Top_praise_givers = () => {
     const [users, setUsers] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+    const [selectedCategoryId, setSelectedCategoryId] = useState("All");
 
     useEffect(() => {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_categories/", {
@@ -26,8 +26,22 @@ const Top_praise_givers = () => {
     }, []);
 
     useEffect(() => {
-        if (selectedCategoryId) {
-
+        if (selectedCategoryId == "All") {
+            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_givers/?current_item=0`, {
+                method: "GET",
+                cache: "no-cache"
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("get_top_praise_givers");
+                    console.log(JSON.parse(data));
+                    setUsers(JSON.parse(data));
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+        else {
             fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_givers/?current_item=0&category_id=${selectedCategoryId}`, {
                 method: "GET",
                 cache: "no-cache"
@@ -54,6 +68,7 @@ const Top_praise_givers = () => {
             <Form>
                 <Form.Group controlId="categorySelect" style={{ marginBottom: '15px' }}>
                     <Form.Select value={selectedCategoryId} onChange={handleCategoryChange}>
+                        <option value={"All"}>All</option>
                         {categories.map((category) => (
                             <option key={category.pk} value={category.pk}>
                                 {category.fields.name}
