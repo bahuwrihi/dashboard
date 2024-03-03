@@ -31,3 +31,10 @@
 .faq-item:hover {
     background-color: #e2e6ea;
 }
+.faq_group{
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0000009c;
+    margin-right: 5px;
+    
+}

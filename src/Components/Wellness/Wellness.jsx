@@ -88,7 +88,7 @@ function Wellness() {
                                     <td>{entry.sender__username}</td>
                                     <td>{entry.emoji}</td>
                                     <td>{formatDate(entry.formatted_time)}</td>
-                                    <td>{entry.group__name}</td>
+                                    <td>{entry.group__name} {entry.topic}</td>
                                 </tr>
                             ))}
                         </tbody>

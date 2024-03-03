@@ -67,16 +67,24 @@ const Faq = () => {
     return (
         <div className="faq-container">
             <div className='d-flex justify-content-between align-items-center'>
-                <h2>All Assistants</h2>
+                <h2>All FAQ</h2>
                 <div className='download_csv' onClick={Download}>Download csv <DownloadIcon /></div>
 
             </div>
             <ul className="faq-list">
                 {faq.map((faq, index) => (
-                    <li key={index} className="faq-item">
-                        <span className="faq-question">{faq.fields.question}</span>
-                        <span className="faq-date">{formatDate(faq.fields.time)}</span>
-                    </li>
+                    <>
+                        <div className='d-flex align-items-center'>
+                            <div className='faq_group'>{faq.group__name} </div>
+                            <div>{faq.topic}</div>
+                        </div>
+
+                        <li key={index} className="faq-item">
+                            <span className="faq-question">{faq.question}</span>
+                            <span className="faq-date">{formatDate(faq.formatted_time)}</span>
+                        </li>
+                    </>
+
                 ))}
             </ul>
         </div>

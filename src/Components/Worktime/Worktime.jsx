@@ -124,7 +124,7 @@ function Worktime() {
                                     <td>{user.formatted_date}</td>
                                     <td>{user.working_hours}</td>
                                     <td>{user.work_periods}</td>
-                                    <td>{user.group__name}</td>
+                                    <td>{user.group__name} {user.topic} </td>
                                 </tr>
                             ))}
                         </tbody>
