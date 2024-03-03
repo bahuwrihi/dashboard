@@ -88,8 +88,8 @@ function Praises() {
                 <tbody>
                     {praises.map((praise) => (
                         <tr key={praise.pk}>
-                            <td>{praise.topic}</td>
                             <td>{praise.group__name} </td>
+                            <td>{praise.topic}</td>
                             <td>{praise.sender__username}</td>
                             <td>{praise.receiver__username}</td>
                             <td>{praise.reason || "—"}</td>
