@@ -7,7 +7,7 @@ function Users() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch("http://64.226.70.3:8001/get_users/?current_item=0", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_users/?current_item=0", {
             method: "GET",
             cache: "no-cache"
         })
@@ -22,7 +22,7 @@ function Users() {
     }, []);
 
     function Download() {
-        fetch("http://64.226.70.3:8001/users_to_csv/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/users_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

@@ -9,7 +9,7 @@ const Top_praise_receivers = () => {
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     useEffect(() => {
         if (selectedCategoryId == "All") {
-            fetch(`http://64.226.70.3:8001/get_top_praise_receivers/?current_item=0`, {
+            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_receivers/?current_item=0`, {
                 method: "GET",
                 cache: "no-cache"
             })
@@ -22,7 +22,7 @@ const Top_praise_receivers = () => {
                 });
         }
         else {
-            fetch(`http://64.226.70.3:8001/get_top_praise_receivers/?current_item=0&category_id=${selectedCategoryId}`, {
+            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_receivers/?current_item=0&category_id=${selectedCategoryId}`, {
                 method: "GET",
                 cache: "no-cache"
             })
@@ -39,7 +39,7 @@ const Top_praise_receivers = () => {
 
     useEffect(() => {
 
-        fetch("http://64.226.70.3:8001/get_all_categories/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_categories/", {
             method: "GET",
             cache: "no-cache"
         })

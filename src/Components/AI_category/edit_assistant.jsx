@@ -15,7 +15,7 @@ function Edit_assistant({ assistant_id, AssistantName, AssistantInstruction }) {
 
 
     useEffect(() => {
-        fetch(`http://64.226.70.3:8001get_category/?id=${id}`, {
+        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_category/?id=${id}`, {
             method: "GET",
             cache: "no-cache"
         })
@@ -40,7 +40,7 @@ function Edit_assistant({ assistant_id, AssistantName, AssistantInstruction }) {
         event.preventDefault();
         console.log("AssistantName " + AssistantNameNew)
         console.log("AssistantInfo " + AssistantInstructionNew)
-        fetch(`http://64.226.70.3:8001change_category/${id}/`, {
+        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/change_category/${id}/`, {
             method: "PUT",
             mode: "cors",
             cache: "no-cache",

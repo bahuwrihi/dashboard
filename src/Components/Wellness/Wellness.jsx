@@ -6,7 +6,7 @@ function Wellness() {
     const [wellnessEntries, setWellnessEntries] = useState([]);
 
     useEffect(() => {
-        fetch("http://64.226.70.3:8001/get_wellness/?current_item=0", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_wellness/?current_item=0", {
             method: "GET",
             cache: "no-cache"
         })
@@ -21,7 +21,7 @@ function Wellness() {
     }, []);
 
     function Download() {
-        fetch("http://64.226.70.3:8001/wellness_to_csv/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/wellness_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

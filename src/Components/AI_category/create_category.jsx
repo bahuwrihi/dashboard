@@ -14,7 +14,7 @@ function CategoryForm() {
         formData.append('name', AssistantName);
         formData.append('description', AssistantInfo);
         console.log(formData)
-        fetch("http://64.226.70.3:8001/create_category/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/create_category/", {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -29,7 +29,6 @@ function CategoryForm() {
 
     return (
         <>
-            {/* <Header /> */}
             <Container>
                 <div className='title'>Create a new Assistant</div>
                 <Form onSubmit={handleSubmit} className='w-75'>

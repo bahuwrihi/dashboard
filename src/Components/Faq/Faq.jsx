@@ -6,7 +6,7 @@ const Faq = () => {
     const [faq, setFaq] = useState([]);
 
     useEffect(() => {
-        fetch("http://64.226.70.3:8001/get_all_FAQ/?current_item=0", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_FAQ/?current_item=0", {
             method: "GET",
             cache: "no-cache"
         })
@@ -27,7 +27,7 @@ const Faq = () => {
     };
 
     function Download() {
-        fetch("http://64.226.70.3:8001/faq_to_csv/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/faq_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

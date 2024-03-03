@@ -8,7 +8,7 @@ function Worktime() {
     const [sortOption, setSortOption] = useState('dateAsc');
 
     useEffect(() => {
-        fetch("http://64.226.70.3:8001/get_worktime/?current_item=0", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_worktime/?current_item=0", {
             method: "GET",
             cache: "no-cache"
         })
@@ -41,7 +41,7 @@ function Worktime() {
 
 
     function Download() {
-        fetch("http://64.226.70.3:8001/worktime_to_csv/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/worktime_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

@@ -5,7 +5,7 @@ function Praises() {
     const [praises, setPraises] = useState([]);
 
     useEffect(() => {
-        fetch("http://64.226.70.3:8001/get_praises/?current_item=0", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_item=0", {
             method: "GET",
             cache: "no-cache"
         })
@@ -20,7 +20,7 @@ function Praises() {
     }, []);
 
     function Download() {
-        fetch("http://64.226.70.3:8001/praises_to_csv/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/praises_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })
