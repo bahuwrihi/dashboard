@@ -6,7 +6,7 @@ function Wellness() {
     const [wellnessEntries, setWellnessEntries] = useState([]);
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_wellness/?current_item=0", {
+        fetch("http://64.226.70.3:8001/get_wellness/?current_item=0", {
             method: "GET",
             cache: "no-cache"
         })
@@ -20,6 +20,45 @@ function Wellness() {
             });
     }, []);
 
+    function Download() {
+        fetch("http://64.226.70.3:8001/wellness_to_csv/", {
+            method: "GET",
+            cache: "no-cache"
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                let filename = "wellness.csv";
+                const disposition = response.headers.get('Content-Disposition');
+                if (disposition && disposition.indexOf('attachment') !== -1) {
+                    const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                    const matches = filenameRegex.exec(disposition);
+                    if (matches != null && matches[1]) {
+                        filename = matches[1].replace(/['"]/g, '');
+                    }
+                }
+
+                return response.blob().then(blob => {
+                    return { blob, filename };
+                });
+            })
+            .then(({ blob, filename }) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
         return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -28,9 +67,9 @@ function Wellness() {
     return (
         <>
             <div className="container mt-5">
-                <div className='d-flex justify-content-between'>
+                <div className='d-flex justify-content-between align-items-center'>
                     <h2>Wellness Check-ins</h2>
-                    <div><DownloadIcon /></div>
+                    <div className='download_csv' onClick={Download}>Download csv <DownloadIcon /></div>
 
                 </div>
                 <div className="table-responsive">

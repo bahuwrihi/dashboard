@@ -81,3 +81,8 @@ code {
   width: 1.7rem;
   height: 1.7rem;
 }
+.download_csv{
+  font-size: 1rem;
+  cursor: pointer;
+  color: rgb(52, 122, 226);
+}
