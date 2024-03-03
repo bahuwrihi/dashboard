@@ -27,7 +27,7 @@ const Faq = () => {
     };
 
     function Download() {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/faq_to_csv/", {
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/FAQ_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

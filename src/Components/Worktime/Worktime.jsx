@@ -49,7 +49,7 @@ function Worktime() {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                let filename = "wellness.csv";
+                let filename = "worktime.csv";
                 const disposition = response.headers.get('Content-Disposition');
                 if (disposition && disposition.indexOf('attachment') !== -1) {
                     const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
@@ -115,6 +115,7 @@ function Worktime() {
                                 <th className='table_header'>Working Hours</th>
                                 <th className='table_header'>Work Periods</th>
                                 <th className='table_header'>Group</th>
+                                <th className='table_header'>Topic</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -124,7 +125,8 @@ function Worktime() {
                                     <td>{user.formatted_date}</td>
                                     <td>{user.working_hours}</td>
                                     <td>{user.work_periods}</td>
-                                    <td>{user.group__name} {user.topic} </td>
+                                    <td>{user.group__name}  </td>
+                                    <td> {user.topic} </td>
                                 </tr>
                             ))}
                         </tbody>
