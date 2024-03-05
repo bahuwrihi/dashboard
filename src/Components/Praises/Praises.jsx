@@ -18,22 +18,24 @@ function Praises() {
             .then(data => {
                 const parsedData = JSON.parse(data.data);
                 setPraises(parsedData);
-                console.log(data)
-                setPageCount(data.pages_count);
+                setPageCount(data.pages_count); // Assuming 'pages_count' is provided by your API
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
     }, [current, sortOption]);
 
-
     const handlePageChange = (event, value) => {
         setCurrent(value);
     };
 
-    useEffect(() => {
-        sortData(praises);
-    }, [sortOption]);
+    const handleSortOptionChange = (e) => {
+        setSortOption(e.target.value);
+    };
+
+    // useEffect(() => {
+    //     sortData(praises);
+    // }, [sortOption]);
 
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
@@ -82,29 +84,7 @@ function Praises() {
 
 
 
-    const sortData = (data) => {
-        console.log('Sorting Data:', data, 'Sort Option:', sortOption);
-        const sorted = [...data].sort((a, b) => {
-            let isAscending = sortOption.endsWith('Asc');
-            if (sortOption.startsWith('time')) {
-                console.log('Sorting by time', 'Is Ascending:', isAscending);
-                if (isAscending) {
-                    return new Date(a.formatted_time) - new Date(b.formatted_time);
-                } else {
-                    return new Date(b.formatted_time) - new Date(a.formatted_time);
-                }
-            }
-            // Default case, should not reach here for now
-            return 0;
-        });
-        console.log('Sorted Data:', sorted);
-        setPraises(sorted);
-    };
 
-
-    const handleSortOptionChange = (e) => {
-        setSortOption(e.target.value);
-    };
 
     return (
         <>
@@ -117,8 +97,8 @@ function Praises() {
                 <Form.Group controlId="sortOption">
                     <Form.Label>Sort Options</Form.Label>
                     <Form.Control as="select" value={sortOption} onChange={handleSortOptionChange}>
-                        <option value="timeAsc">Time Ascending</option>
-                        <option value="timeDesc">Time Descending</option>
+                        <option value="asc">Time Ascending</option>
+                        <option value="desc">Time Descending</option>
                     </Form.Control>
                 </Form.Group>
             </Form>
