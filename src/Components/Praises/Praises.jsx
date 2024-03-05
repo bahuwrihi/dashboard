@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
+import { Form } from 'react-bootstrap';
 
 function Praises() {
     const [praises, setPraises] = useState([]);
+    const [sortOption, setSortOption] = useState('timeDesc');
 
     useEffect(() => {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_item=0", {
@@ -11,13 +13,23 @@ function Praises() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(JSON.parse(data))
-                setPraises(JSON.parse(data));
+                const parsedData = JSON.parse(data);
+                sortData(parsedData);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
     }, []);
+
+    useEffect(() => {
+        sortData(praises);
+    }, [sortOption]);
+
+    const formatDate = (dateStr) => {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-EN', { day: 'numeric', month: 'short' });
+    };
+
 
     function Download() {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/praises_to_csv/", {
@@ -60,9 +72,28 @@ function Praises() {
 
 
 
-    const formatDate = (dateStr) => {
-        const date = new Date(dateStr);
-        return date.toLocaleDateString('en-EN', { day: 'numeric', month: 'short' });
+    const sortData = (data) => {
+        console.log('Sorting Data:', data, 'Sort Option:', sortOption);
+        const sorted = [...data].sort((a, b) => {
+            let isAscending = sortOption.endsWith('Asc');
+            if (sortOption.startsWith('time')) {
+                console.log('Sorting by time', 'Is Ascending:', isAscending);
+                if (isAscending) {
+                    return new Date(a.formatted_time) - new Date(b.formatted_time);
+                } else {
+                    return new Date(b.formatted_time) - new Date(a.formatted_time);
+                }
+            }
+            // Default case, should not reach here for now
+            return 0;
+        });
+        console.log('Sorted Data:', sorted);
+        setPraises(sorted);
+    };
+
+
+    const handleSortOptionChange = (e) => {
+        setSortOption(e.target.value);
     };
 
     return (
@@ -70,8 +101,18 @@ function Praises() {
             <div className='d-flex justify-content-between align-items-center'>
                 <h2>Praises</h2>
                 <div className='download_csv' onClick={Download}>Download csv <DownloadIcon /></div>
-
             </div>
+
+            <Form>
+                <Form.Group controlId="sortOption">
+                    <Form.Label>Sort Options</Form.Label>
+                    <Form.Control as="select" value={sortOption} onChange={handleSortOptionChange}>
+                        <option value="timeAsc">Time Ascending</option>
+                        <option value="timeDesc">Time Descending</option>
+                        {/* Add more options based on what you want to allow sorting by */}
+                    </Form.Control>
+                </Form.Group>
+            </Form>
 
             <table className="table">
                 <thead>
@@ -88,7 +129,7 @@ function Praises() {
                 <tbody>
                     {praises.map((praise) => (
                         <tr key={praise.pk}>
-                            <td>{praise.group__name} </td>
+                            <td>{praise.group__name}</td>
                             <td>{praise.topic}</td>
                             <td>{praise.sender__username}</td>
                             <td>{praise.receiver__username}</td>
@@ -100,7 +141,6 @@ function Praises() {
                 </tbody>
             </table>
         </>
-
     );
 }
 

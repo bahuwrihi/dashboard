@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../Header/header';
 import DownloadIcon from '@mui/icons-material/Download';
+import { Form } from 'react-bootstrap';
 
 function Wellness() {
     const [wellnessEntries, setWellnessEntries] = useState([]);
+    const [sortOption, setSortOption] = useState('dateDesc');
 
     useEffect(() => {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_wellness/?current_item=0", {
@@ -12,13 +13,17 @@ function Wellness() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(JSON.parse(data))
-                setWellnessEntries(JSON.parse(data));
+                const parsedData = JSON.parse(data);
+                sortData(parsedData);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
     }, []);
+
+    useEffect(() => {
+        sortData(wellnessEntries);
+    }, [sortOption]);
 
     function Download() {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/wellness_to_csv/", {
@@ -59,6 +64,24 @@ function Wellness() {
             });
     }
 
+    const sortData = (data) => {
+        const sortedData = [...data].sort((a, b) => {
+            switch (sortOption) {
+                case 'dateAsc':
+                    return new Date(a.formatted_time) - new Date(b.formatted_time);
+                case 'dateDesc':
+                    return new Date(b.formatted_time) - new Date(a.formatted_time);
+                default:
+                    return 0;
+            }
+        });
+        setWellnessEntries(sortedData);
+    };
+
+    const handleSortChange = (event) => {
+        setSortOption(event.target.value);
+    };
+
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
         return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -70,8 +93,18 @@ function Wellness() {
                 <div className='d-flex justify-content-between align-items-center'>
                     <h2>Wellness Check-ins</h2>
                     <div className='download_csv' onClick={Download}>Download csv <DownloadIcon /></div>
-
                 </div>
+
+                <Form>
+                    <Form.Group controlId="sortOption">
+                        <Form.Label>Sort by</Form.Label>
+                        <Form.Control as="select" value={sortOption} onChange={handleSortChange}>
+                            <option value="dateAsc">Date Ascending</option>
+                            <option value="dateDesc">Date Descending</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Form>
+
                 <div className="table-responsive">
                     <table className="table">
                         <thead>

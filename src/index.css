@@ -86,3 +86,16 @@ code {
   cursor: pointer;
   color: rgb(52, 122, 226);
 }
+.delete_all{
+  color: #ff00007d;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.modal-backdrop.fade {
+  z-index: 10000 !important; 
+  background: #cccccc;
+  opacity: 0.5 !important;
+}
+.modal {
+  z-index: 20000 !important;
+} 
