@@ -10,7 +10,6 @@ function Praises() {
     const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        // Fetch praises and page count from the server
         fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_page=${current}&sorting=${sortOption}`, {
             method: "GET",
             cache: "no-cache"
@@ -19,7 +18,8 @@ function Praises() {
             .then(data => {
                 const parsedData = JSON.parse(data.data);
                 setPraises(parsedData);
-                setPageCount(data.total_pages);
+                console.log(data)
+                setPageCount(data.pages_count);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);

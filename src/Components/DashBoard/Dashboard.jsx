@@ -4,17 +4,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Top_praise_givers from './Info/Top_praise_givers';
 import Top_praise_receivers from './Info/Top_praise_receivers';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { Modal, Button } from 'react-bootstrap'; // Importing Modal and Button from react-bootstrap
+import { Modal, Button } from 'react-bootstrap';
 
 function Dashboard() {
-    const [show, setShow] = useState(false); // useState to control the display of the modal
+    const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleDelete = () => {
-        // Here you can add the logic to delete all data
         console.log('Deleting all data...');
-        handleClose(); // Close the modal after the action
+
+        handleClose();
+
+        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/delete_all_data/", {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+        })
+            .then(response => response.json())
+            .then(data => {
+
+            })
+            .catch(error => { console.error("Ошибка при получении данных:", error); });
+
     };
 
     return (
