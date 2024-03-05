@@ -5,7 +5,7 @@ import Pagination from '@mui/material/Pagination';
 
 function Praises() {
     const [praises, setPraises] = useState([]);
-    const [sortOption, setSortOption] = useState('timeDesc');
+    const [sortOption, setSortOption] = useState('asc');
     const [current, setCurrent] = useState(1);
     const [pageCount, setPageCount] = useState(0);
 
