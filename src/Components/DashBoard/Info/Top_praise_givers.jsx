@@ -27,7 +27,7 @@ const Top_praise_givers = () => {
 
     useEffect(() => {
         if (selectedCategoryId == "All") {
-            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_givers/?current_item=0`, {
+            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_givers/?current_page=0`, {
                 method: "GET",
                 cache: "no-cache"
             })
@@ -42,7 +42,7 @@ const Top_praise_givers = () => {
                 });
         }
         else {
-            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_givers/?current_item=0&category_id=${selectedCategoryId}`, {
+            fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_top_praise_givers/?current_page=0&category_id=${selectedCategoryId}`, {
                 method: "GET",
                 cache: "no-cache"
             })

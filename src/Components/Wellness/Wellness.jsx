@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Form } from 'react-bootstrap';
+import Pagination from '@mui/material/Pagination'; // Make sure to import from @mui/material, not react-bootstrap
 
 function Wellness() {
     const [wellnessEntries, setWellnessEntries] = useState([]);
-    const [sortOption, setSortOption] = useState('dateDesc');
+    const [sortOption, setSortOption] = useState('asc');
+    const [current, setCurrent] = useState(1);
+    const [pageCount, setPageCount] = useState(0); // This should be set based on API response
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_wellness/?current_item=0", {
+        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_wellness/?current_page=${current}&sorting=${sortOption}`, {
             method: "GET",
             cache: "no-cache"
         })
             .then(response => response.json())
             .then(data => {
-                const parsedData = JSON.parse(data);
-                sortData(parsedData);
+                console.log(data);
+                const parsedData = JSON.parse(data.data);
+                setWellnessEntries(parsedData);
+                setPageCount(data.total_pages);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-    }, []);
+    }, [current, sortOption]);
 
-    useEffect(() => {
-        sortData(wellnessEntries);
-    }, [sortOption]);
+    const handleSortChange = (event) => {
+        setSortOption(event.target.value);
+    };
+
+    const handlePageChange = (event, value) => {
+        setCurrent(value);
+    };
+
 
     function Download() {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/wellness_to_csv/", {
@@ -64,24 +74,6 @@ function Wellness() {
             });
     }
 
-    const sortData = (data) => {
-        const sortedData = [...data].sort((a, b) => {
-            switch (sortOption) {
-                case 'dateAsc':
-                    return new Date(a.formatted_time) - new Date(b.formatted_time);
-                case 'dateDesc':
-                    return new Date(b.formatted_time) - new Date(a.formatted_time);
-                default:
-                    return 0;
-            }
-        });
-        setWellnessEntries(sortedData);
-    };
-
-    const handleSortChange = (event) => {
-        setSortOption(event.target.value);
-    };
-
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
         return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -99,8 +91,8 @@ function Wellness() {
                     <Form.Group controlId="sortOption">
                         <Form.Label>Sort by</Form.Label>
                         <Form.Control as="select" value={sortOption} onChange={handleSortChange}>
-                            <option value="dateAsc">Date Ascending</option>
-                            <option value="dateDesc">Date Descending</option>
+                            <option value="asc">Date Ascending</option>
+                            <option value="desc">Date Descending</option>
                         </Form.Control>
                     </Form.Group>
                 </Form>
@@ -128,6 +120,15 @@ function Wellness() {
                             ))}
                         </tbody>
                     </table>
+                </div>
+
+                <div className="pagination-container">
+                    <Pagination
+                        count={pageCount}
+                        page={current}
+                        onChange={handlePageChange}
+                        color="primary"
+                    />
                 </div>
             </div>
         </>

@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
 import { Form } from 'react-bootstrap';
+import Pagination from '@mui/material/Pagination';
 
 function Praises() {
     const [praises, setPraises] = useState([]);
     const [sortOption, setSortOption] = useState('timeDesc');
+    const [current, setCurrent] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_item=0", {
+        // Fetch praises and page count from the server
+        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_page=${current}&sorting=${sortOption}`, {
             method: "GET",
             cache: "no-cache"
         })
             .then(response => response.json())
             .then(data => {
-                const parsedData = JSON.parse(data);
-                sortData(parsedData);
+                const parsedData = JSON.parse(data.data);
+                setPraises(parsedData);
+                setPageCount(data.total_pages);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-    }, []);
+    }, [current, sortOption]);
+
+
+    const handlePageChange = (event, value) => {
+        setCurrent(value);
+    };
 
     useEffect(() => {
         sortData(praises);
@@ -109,7 +119,6 @@ function Praises() {
                     <Form.Control as="select" value={sortOption} onChange={handleSortOptionChange}>
                         <option value="timeAsc">Time Ascending</option>
                         <option value="timeDesc">Time Descending</option>
-                        {/* Add more options based on what you want to allow sorting by */}
                     </Form.Control>
                 </Form.Group>
             </Form>
@@ -140,6 +149,14 @@ function Praises() {
                     ))}
                 </tbody>
             </table>
+            <div className="pagination-container">
+                <Pagination
+                    count={pageCount}
+                    page={current}
+                    onChange={handlePageChange}
+                    color="primary"
+                />
+            </div>
         </>
     );
 }

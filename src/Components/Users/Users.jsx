@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../Header/header'
 import DownloadIcon from '@mui/icons-material/Download';
-
+import Pagination from '@mui/material/Pagination';
 
 function Users() {
     const [users, setUsers] = useState([]);
+    const [current, setCurrent] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_users/?current_item=0", {
+        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_users/?current_page=${current}`, {
             method: "GET",
             cache: "no-cache"
         })
             .then(response => response.json())
             .then(data => {
-                console.log(JSON.parse(data))
-                setUsers(JSON.parse(data))
+                const parsedData = JSON.parse(data.data);
+                setUsers(parsedData);
+                setPageCount(parsedData.total_pages);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-    }, []);
+    }, [current]);
+
+    const handlePageChange = (event, value) => {
+        setCurrent(value);
+    };
+
 
     function Download() {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/users_to_csv/", {
@@ -89,6 +96,14 @@ function Users() {
                             ))}
                         </tbody>
                     </table>
+                </div>
+                <div className="pagination-container">
+                    <Pagination
+                        count={pageCount}
+                        page={current}
+                        onChange={handlePageChange}
+                        color="primary"
+                    />
                 </div>
             </div>
         </>

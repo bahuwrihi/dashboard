@@ -1,45 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../Header/header';
 import { Form } from 'react-bootstrap';
 import DownloadIcon from '@mui/icons-material/Download';
+import Pagination from '@mui/material/Pagination';
 
 function Worktime() {
     const [users, setUsers] = useState([]);
-    const [sortOption, setSortOption] = useState('dateAsc');
+    const [current, setCurrent] = useState(1);
+    const [sortOption, setSortOption] = useState('date_asc');
+    const [pageCount, setpageCount] = useState('date_asc');
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_worktime/?current_item=0", {
+        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_worktime/?current_page=${current}&sorting=${sortOption}`, {
             method: "GET",
             cache: "no-cache"
         })
             .then(response => response.json())
             .then(data => {
-                const parsedData = JSON.parse(data);
-                sortData(parsedData);
+                setpageCount(data.pages_count)
+                setUsers(JSON.parse(data.data));
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-    }, []);
+    }, [current, sortOption]);
 
-    useEffect(() => {
-        sortData(users);
-    }, [sortOption]);
-
-
-    const sortData = (data) => {
-        const sorted = [...data].sort((a, b) => {
-            let isAscending = sortOption.endsWith('Asc');
-            let sortBy = sortOption.startsWith('date') ? 'date' : 'work_periods';
-            let valA = sortBy === 'date' ? new Date(a.formatted_date) : a.work_periods;
-            let valB = sortBy === 'date' ? new Date(b.formatted_date) : b.work_periods;
-
-            return isAscending ? (valA < valB ? -1 : 1) : (valA > valB ? -1 : 1);
-        });
-        setUsers(sorted);
+    const handlePageChange = (event, value) => {
+        setCurrent(value);
     };
-
-
     function Download() {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/worktime_to_csv/", {
             method: "GET",
@@ -93,18 +80,14 @@ function Worktime() {
 
                 </div>
 
-                <Form>
-                    <Form.Group controlId="sortOption">
-                        <Form.Label>Sort Options</Form.Label>
-                        <Form.Control as="select" value={sortOption} onChange={handleSortOptionChange}>
-                            <option value="">Select</option>
-                            <option value="dateAsc">Date Ascending</option>
-                            <option value="dateDesc">Date Descending</option>
-                            <option value="work_periodsAsc">Work Periods Ascending</option>
-                            <option value="work_periodsDesc">Work Periods Descending</option>
-                        </Form.Control>
-                    </Form.Group>
-                </Form>
+                <Form.Control as="select" value={sortOption} onChange={handleSortOptionChange}>
+                    <option value="" disabled>Select</option>
+                    <option value="date_asc">Date Ascending</option>
+                    <option value="date_desc">Date Descending</option>
+                    <option value="work_periods_asc">Work Periods Ascending</option>
+                    <option value="work_periods_desc">Work Periods Descending</option>
+                </Form.Control>
+
 
                 <div className="table-responsive">
                     <table className="table">
@@ -132,6 +115,17 @@ function Worktime() {
                         </tbody>
                     </table>
                 </div>
+
+
+                <div className="pagination-container">
+                    <Pagination
+                        count={pageCount}
+                        page={current}
+                        onChange={handlePageChange}
+                        color="primary"
+                    />
+                </div>
+
             </div>
         </>
     );

@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import "./Faq.css"
+import "./Faq.css";
 import DownloadIcon from '@mui/icons-material/Download';
+import Pagination from '@mui/material/Pagination'; // Import the Pagination component
 
 const Faq = () => {
     const [faq, setFaq] = useState([]);
+    const [current, setCurrent] = useState(1);
+    const [pageCount, setPageCount] = useState(0); // State to track the total number of pages
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_FAQ/?current_item=0", {
+        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_FAQ/?current_page=${current}`, {
             method: "GET",
             cache: "no-cache"
         })
             .then(response => response.json())
             .then(data => {
-                console.log(JSON.parse(data))
-                setFaq(JSON.parse(data))
+                // console.log(JSON.parse(data))
+                const parsedData = JSON.parse(data);
+                setFaq(parsedData);
+                // setPageCount(parsedData.total_pages);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
             });
-    }, []);
-
+    }, [current]);
 
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
         return date.toLocaleDateString('en-EN', { day: 'numeric', month: 'short' });
     };
 
+    const handlePageChange = (event, value) => {
+        setCurrent(value);
+    };
     function Download() {
         fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/FAQ_to_csv/", {
             method: "GET",
@@ -87,6 +94,14 @@ const Faq = () => {
 
                 ))}
             </ul>
+            {/* <div className="pagination-container">
+                <Pagination
+                    count={pageCount}
+                    page={current}
+                    onChange={handlePageChange}
+                    color="primary"
+                />
+            </div> */}
         </div>
     )
 };
