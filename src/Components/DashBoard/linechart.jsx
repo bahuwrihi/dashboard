@@ -33,7 +33,7 @@ export default function App() {
 
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises_by_date/", {
+        fetch("https://dcdashboard.top/get_praises_by_date/", {
             method: "GET",
             cache: "no-cache"
         })

@@ -101,19 +101,7 @@ const MyProSidebar = () => {
                 image={sidebarImage}
             >
                 <Menu iconshape="square">
-                    {/* <Box
-                        sx={{
-                            paddingLeft: collapsed ? undefined : "10%",
-                            marginBottom: "1rem",
-                            marginTop: "1rem",
-                            textAlign: "center",
-                            "& img": {
-                                width: "50%",
-                            },
-                        }}
-                    >
-                        <img src={logo} alt="Logo" />
-                    </Box> */}
+                   
 
                     <Box paddingLeft={collapsed ? undefined : "10%"}
                     >

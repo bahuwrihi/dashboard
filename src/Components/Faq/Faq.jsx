@@ -9,7 +9,7 @@ const Faq = () => {
     const [pageCount, setPageCount] = useState(0); // State to track the total number of pages
 
     useEffect(() => {
-        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_FAQ/?current_page=${current}`, {
+        fetch(`https://dcdashboard.top/get_all_FAQ/?current_page=${current}`, {
             method: "GET",
             cache: "no-cache"
         })
@@ -34,7 +34,7 @@ const Faq = () => {
         setCurrent(value);
     };
     function Download() {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/FAQ_to_csv/", {
+        fetch("https://dcdashboard.top/FAQ_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

@@ -8,7 +8,7 @@ function Users() {
     const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_users/?current_page=${current}`, {
+        fetch(`https://dcdashboard.top/get_users/?current_page=${current}`, {
             method: "GET",
             cache: "no-cache"
         })

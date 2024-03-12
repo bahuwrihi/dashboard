@@ -10,7 +10,7 @@ function Worktime() {
     const [pageCount, setpageCount] = useState('date_asc');
 
     useEffect(() => {
-        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_worktime/?current_page=${current}&sorting=${sortOption}`, {
+        fetch(`https://dcdashboard.top/get_worktime/?current_page=${current}&sorting=${sortOption}`, {
             method: "GET",
             cache: "no-cache"
         })
@@ -28,7 +28,7 @@ function Worktime() {
         setCurrent(value);
     };
     function Download() {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/worktime_to_csv/", {
+        fetch("https://dcdashboard.top/worktime_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

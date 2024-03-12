@@ -7,7 +7,7 @@ function All_categories() {
     const [customersData, setCustomersData] = useState([]);
 
     useEffect(() => {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/get_all_categories/", {
+        fetch("https://dcdashboard.top/get_all_categories/", {
             method: "GET",
             cache: "no-cache"
         })
@@ -23,7 +23,7 @@ function All_categories() {
 
 
     function Download() {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/categories_to_csv/", {
+        fetch("https://dcdashboard.top/categories_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })

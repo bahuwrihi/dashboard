@@ -14,7 +14,7 @@ function CategoryForm() {
         formData.append('name', AssistantName);
         formData.append('description', AssistantInfo);
         console.log(formData)
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/create_category/", {
+        fetch("https://dcdashboard.top/create_category/", {
             method: "POST",
             mode: "cors",
             cache: "no-cache",

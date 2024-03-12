@@ -10,7 +10,7 @@ function Praises() {
     const [pageCount, setPageCount] = useState(0);
 
     useEffect(() => {
-        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_praises/?current_page=${current}&sorting=${sortOption}`, {
+        fetch(`https://dcdashboard.top/get_praises/?current_page=${current}&sorting=${sortOption}`, {
             method: "GET",
             cache: "no-cache"
         })
@@ -18,7 +18,7 @@ function Praises() {
             .then(data => {
                 const parsedData = JSON.parse(data.data);
                 setPraises(parsedData);
-                setPageCount(data.pages_count); // Assuming 'pages_count' is provided by your API
+                setPageCount(data.pages_count); 
             })
             .catch(error => {
                 console.error("Error fetching data:", error);

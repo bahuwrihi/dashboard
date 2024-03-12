@@ -54,7 +54,7 @@ function CustomFormValidation() {
     //   .catch(error=>{console.error("Error fetching data:", error);}) 
 
 
-    if(state.email == 1 && state.password ==1){
+    if(state.email == "DCadmin" && state.password =="decentral#1987"){
       navigate("/dashboard")
     }
 

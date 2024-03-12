@@ -16,7 +16,7 @@ function Dashboard() {
 
         handleClose();
 
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/delete_all_data/", {
+        fetch("https://dcdashboard.top//delete_all_data/", {
             method: "POST",
             mode: "cors",
             cache: "no-cache",

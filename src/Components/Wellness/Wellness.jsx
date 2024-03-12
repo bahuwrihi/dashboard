@@ -10,7 +10,7 @@ function Wellness() {
     const [pageCount, setPageCount] = useState(0); // This should be set based on API response
 
     useEffect(() => {
-        fetch(`https://dashboard-dmitrykarpov.pythonanywhere.com/get_wellness/?current_page=${current}&sorting=${sortOption}`, {
+        fetch(`https://dcdashboard.top/get_wellness/?current_page=${current}&sorting=${sortOption}`, {
             method: "GET",
             cache: "no-cache"
         })
@@ -36,7 +36,7 @@ function Wellness() {
 
 
     function Download() {
-        fetch("https://dashboard-dmitrykarpov.pythonanywhere.com/wellness_to_csv/", {
+        fetch("https://dcdashboard.top/wellness_to_csv/", {
             method: "GET",
             cache: "no-cache"
         })
